@@ -6,7 +6,9 @@
     padding-bottom: 2rem;
     gap: 1rem;
 }
-
+.profile__container__margin{
+    margin-top:1rem;
+}
 .profile__pic {
     margin: 0 auto;
 }
@@ -60,6 +62,9 @@
     gap: 2rem;
 }
 
+.profile__container__margin__desktop{
+    margin-top: 6rem;
+}
 
 
 .profile__box__desktop {

@@ -7,12 +7,9 @@ import Side_Bar from '../home/side_bar/Side_Bar'
 import { useParams } from 'react-router-dom';
 import Video_card from '../../components/video_card/Video_card'
 import Header from '../../components/header/Header'
-import UserService from '../../service/UserService'; // Importe o serviço de produtos aqui
-
+import EngagementService from '../../service/EngagementService'; // Importe o serviço de produtos aqui
 
 import ProfilePicture from '../../assets/image/channel_profile.png'
-import axios from 'axios';
-
 
 
 const Profile = ({ }) => {
@@ -21,21 +18,14 @@ const Profile = ({ }) => {
     const { usuarioId } = useParams();
 
     useEffect(() => {
-        UserService.findOne(usuarioId)
+        EngagementService.findOne(usuarioId)
             .then((data) => setUsuario(data))
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, [usuarioId]);
 
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-    const [usuarios, setUsuarios] = useState([]);
-
-    useEffect(() => {
-        UserService.listar()
-            .then((data) => setUsuarios(data))
-            .catch((error) => console.error('Erro ao buscar produtos:', error));
-    }, []);
-
+   
     useEffect(() => {
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -52,7 +42,7 @@ const Profile = ({ }) => {
     const renderMobileView = () => (
         <>
             <HeaderProfile />
-            <div>
+            <div className="profile__container__margin">
                 <div key={usuario.idUsuario}  >
                     <div className='profile__container'>
                         <div className='profile__container__picture' key={usuario.idUsuario}>
@@ -85,7 +75,7 @@ const Profile = ({ }) => {
         <>
             <Side_Bar />
             <Header />
-            <div>
+            <div className="profile__container__margin__desktop">
                 <div key={usuario.idUsuario}  >
                     <div className='profile__container_'>
                         <div className='profile__container__picture__desktop'>

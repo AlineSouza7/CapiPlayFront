@@ -47,4 +47,5 @@ const UserService = {
             throw err;
         }
     }
-};
+}
+export default UserService; 
