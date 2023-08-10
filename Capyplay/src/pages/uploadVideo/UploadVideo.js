@@ -54,10 +54,11 @@ function UploadVideo() {
     descricao: "",
     tags: [],
     categoria: "",
-    ehReels: false,
+    shorts: false,
     video: "",
     miniatura: miniaturaUrl,
-    kids: ""
+    restrito: false,
+    usuarioId: ""
   })
 
   const handleInputChange = (e) => {
