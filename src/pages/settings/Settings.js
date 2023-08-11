@@ -13,10 +13,9 @@ import Button from "../../components/button/Button";
 import UserService from './../../service/UserService'
 import { Link } from 'react-router-dom';
 import TextArea from '../../components/inputTextArea/InputTextArea';
+import Cookies from 'js-cookie';
 
 const Settings = ({ userId }) => {
-
-    userId = "fd86b241-c8ff-4b07-81ee-f01832069c16";
 
     const [settingsData, setSettingsData] = useState({
         nomeUsuario: '',
@@ -64,6 +63,8 @@ const Settings = ({ userId }) => {
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
+
+        userProfile()
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -77,17 +78,29 @@ const Settings = ({ userId }) => {
 
     const handleDeleteProfile = async () => {
         try {
-          const response = await UserService.deletar(userId);
-          console.log('Perfil deletado com sucesso!', response);
-          console.log(userId)
-          closeModal();
-    
+            const response = await UserService.deletar(userId);
+            console.log('Perfil deletado com sucesso!', response);
+            console.log(userId)
+            closeModal();
+
         } catch (error) {
-          console.error('Erro ao deletar perfil:', error);
+            console.error('Erro ao deletar perfil:', error);
         }
-      };
+    };
 
-
+    const userProfile = () => {
+        const user = Cookies.get('user');
+        if (user) {
+            const userLogin = JSON.parse(user);
+            if (userLogin) {
+                return userLogin
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
 
     const renderMobileView = () => (
         <>
@@ -140,7 +153,7 @@ const Settings = ({ userId }) => {
                     </div>
                 </div>
                 <br />
-                <hr className="solid"/>
+                <hr className="solid" />
                 <div className='settings__options__buttons__delete_div'>
                     <button className='settings__options__buttons__delete' onClick={openModal}>Deletar perfil</button>
                     {isModalOpen && (
@@ -208,14 +221,14 @@ const Settings = ({ userId }) => {
                                 />
                             </div>
                         </div>
-                            <div className="settings__field__desktop">
-                                <TextArea
-                                    placeholder={"Descrição do canal"}
-                                    value={settingsData.descricao}
-                                    onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
-                                    required={true}
-                                    className="settings__input"
-                                />
+                        <div className="settings__field__desktop">
+                            <TextArea
+                                placeholder={"Descrição do canal"}
+                                value={settingsData.descricao}
+                                onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                                required={true}
+                                className="settings__input"
+                            />
                         </div>
                     </div>
                 </div>
