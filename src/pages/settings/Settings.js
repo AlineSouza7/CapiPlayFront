@@ -77,20 +77,13 @@ const Settings = ({ userId }) => {
 
     const handleDeleteProfile = async () => {
         try {
-          // Chamada à função de deletar no frontend
-          closeModal(); // Feche o modal de confirmação
-          
-          // Chame a função de deletar do frontend
           const response = await UserService.deletar(userId);
-          
-    
-          // Exiba uma mensagem de sucesso ou realize outras ações necessárias
           console.log('Perfil deletado com sucesso!', response);
           console.log(userId)
+          closeModal();
     
         } catch (error) {
           console.error('Erro ao deletar perfil:', error);
-          // Lide com o erro, exibindo uma mensagem de erro ou tomando outras ações
         }
       };
 
