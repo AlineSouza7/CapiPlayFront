@@ -12,6 +12,8 @@ import VideoService from '../../service/VideoService';
 import Select from '../../components/select/Select';
 
 function UploadVideo() {
+  const userId = '1';
+
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -91,18 +93,6 @@ function UploadVideo() {
     }
   }
 
-  const enviarVideo = (event) => {
-    event.preventDefault()
-
-    setVideo((prevVideo) => ({
-      ...prevVideo,
-      video: videoSrc // Usa o valor atualizado de videoSrc
-    }));
-    VideoService.criar(video)
-    // alert("Cadastro efetuado!")
-    console.log(video)
-    // window.location.reload()
-  }
 
   const renderNewTag = () => {
     if (tag !== "") {
@@ -110,6 +100,17 @@ function UploadVideo() {
       const updatedTags = [...video.tags, tag]; // Adicionar a nova tag à cópia das tags existentes
       setVideo({ ...video, tags: updatedTags }); // Atualizar o estado video com a nova lista de tags
       setTag(""); // Limpar a entrada de tag
+    }
+  };
+
+  const enviarVideo = async (video) => {
+    try {
+      await VideoService.criar(video, userId);
+      console.log('Vídeo enviado com sucesso!');
+      // Você pode redirecionar o usuário para outra página ou executar outras ações após o envio do vídeo.
+    } catch (error) {
+      console.error('Erro ao enviar o vídeo:', error);
+      // Lida com erros de envio de vídeo, se necessário.
     }
   };
 
