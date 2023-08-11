@@ -12,6 +12,19 @@ const UserService = {
         }
     },
 
+    deletar: async (credentialUser) => {
+        try {
+            const res = await axios.delete(userApiUrl, {
+                headers: {
+                    usuarioId : credentialUser
+                }
+            });
+            return res
+        } catch (err) {
+            console.error(err)
+        }
+    },
+
     login: async (credentials) => {
         try {
             const res = await axios.post("/api/usuario/login", credentials)

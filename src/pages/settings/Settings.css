@@ -247,7 +247,7 @@
 
 .settings__input__container__desktop {
     gap: 3rem;
-    width: 53%;
+    width: 75%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

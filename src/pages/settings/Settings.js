@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Settings.css'
 
 //imagem
-import ProfileImage from '../../assets/image/img_base_miniatura.png'
+import ProfileImage from '../../assets/image/channel_profile.png'
 
 //componentes
 import Home from '../home/Home'
@@ -16,7 +16,7 @@ import TextArea from '../../components/inputTextArea/InputTextArea';
 
 const Settings = ({ userId }) => {
 
-    userId = "d033e1ec-d22e-4df6-a250-0b3672da4b59";
+    userId = "fd86b241-c8ff-4b07-81ee-f01832069c16";
 
     const [settingsData, setSettingsData] = useState({
         nomeUsuario: '',
@@ -73,6 +73,28 @@ const Settings = ({ userId }) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+
+    const handleDeleteProfile = async () => {
+        try {
+          // Chamada à função de deletar no frontend
+          closeModal(); // Feche o modal de confirmação
+          
+          // Chame a função de deletar do frontend
+          const response = await UserService.deletar(userId);
+          
+    
+          // Exiba uma mensagem de sucesso ou realize outras ações necessárias
+          console.log('Perfil deletado com sucesso!', response);
+          console.log(userId)
+    
+        } catch (error) {
+          console.error('Erro ao deletar perfil:', error);
+          // Lide com o erro, exibindo uma mensagem de erro ou tomando outras ações
+        }
+      };
+
+
 
     const renderMobileView = () => (
         <>
@@ -135,7 +157,7 @@ const Settings = ({ userId }) => {
                                     <p className='text'>Tem certeza que deseja deletar o perfil?</p>
                                     <div className='modal__buttons'>
                                         <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                        <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                        <Button onClick={handleDeleteProfile} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +238,7 @@ const Settings = ({ userId }) => {
                                     <p className='text'>Tem certeza que deseja deletar o perfil?</p>
                                     <div className='modal__buttons'>
                                         <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                        <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                        <Button onClick={handleDeleteProfile} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
                                     </div>
                                 </div>
                             </div>
@@ -297,7 +319,7 @@ const Settings = ({ userId }) => {
                                     <p className='text'>Tem certeza que deseja deletar o perfil?</p>
                                     <div className='modal__buttons'>
                                         <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                        <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                        <Button onClick={handleDeleteProfile} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
                                     </div>
                                 </div>
                             </div>
