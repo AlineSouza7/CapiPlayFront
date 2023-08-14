@@ -8,7 +8,8 @@ const token = Cookies.get("token")
 const initialState = {
   isAuthenticated: !!token,
   token: token || null,
-  user: {}
+  user: {},
+  isAnonymous: false
 }
 
 const userSlice = createSlice({
